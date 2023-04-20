@@ -1,0 +1,80 @@
+[
+    {
+      "id": "abcd-1234",
+      "label": "Dzial sprzedazy",
+      "children": [
+        {
+          "id": "abcdf-12345",
+          "label": "Dzial X"
+        },
+        {
+          "id": "abcde-12346",
+          "label": "Dzial Y"
+        }
+      ]
+    },
+    {
+      "id": "xyz-1234",
+      "label": "Dzial coś",
+      "children": [
+        {
+          "id": "abcdf-123475",
+          "label": "Dzial N"
+        },
+        {
+          "id": "abcde-123466",
+          "label": "Dzial M"
+        }
+      ]
+    },
+    {
+      "id": "xyz-12344",
+      "label": "Lorem ipsum AA",
+      "children": [
+        {
+          "id": "abcdf-1234754",
+          "label": "Dzial 1"
+        },
+        {
+          "id": "abcde-1234664aa",
+          "label": "Dzial 2"
+        },
+        {
+          "id": "abcde-1234664aaz",
+          "label": "Dzial 3",
+          "children": [
+            {
+              "id": "3abcdf-1234754",
+              "label": "Dzial 31"
+            },
+            {
+              "id": "3abcde-1234664aa",
+              "label": "Dzial 32"
+            },
+            {
+              "id": "3abcde-1234664aaz",
+              "label": "Dzial 33"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "xyz-123446",
+      "label": "Lorem ipsum BB",
+      "children": [
+        {
+          "id": "abcdf-12347546",
+          "label": "Dzial 1"
+        },
+        {
+          "id": "abcde-12346646bb",
+          "label": "Dzial 2"
+        },
+        {
+          "id": "abcde-12346646bbz",
+          "label": "Dzial 3"
+        }
+      ]
+    }
+]
