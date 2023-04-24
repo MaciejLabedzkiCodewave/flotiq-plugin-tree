@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { twMerge } from 'tailwind-merge';
 
 // :: Icon
 import { ChevronUpIcon } from '@heroicons/react/24/outline';
 
 // :: Component
 import Checkbox from '../Checbbox/Checkbox';
-import { twMerge } from 'tailwind-merge';
 
 const TreeItem = ({
   id,
@@ -19,11 +19,23 @@ const TreeItem = ({
   treeItemColor,
   counter,
   hasCounter,
+  aggregateHoverTitle,
+  filtered = false,
+  filteredList = [],
 }) => {
   const colorClasses = {
     none: '',
     gray: 'bg-gray',
   };
+
+  const isHidden = filtered
+    ? filteredList.indexOf(id) > -1
+      ? false
+      : true
+    : false;
+
+  const isHighlighted = filtered && label.toLowerCase().indexOf(filtered) > -1;
+
   return (
     <div
       className={twMerge(
@@ -32,6 +44,7 @@ const TreeItem = ({
         colorClasses[treeItemColor],
         'hover:bg-blue',
         selected?.[id]?.checked && 'bg-blue',
+        isHidden && 'hidden',
       )}
     >
       <ChevronUpIcon
@@ -61,9 +74,11 @@ const TreeItem = ({
           'mr-2 text-gray-150 text-lg',
           'cursor-pointer leading-5 text-ellipsis overflow-hidden',
           'max-w-[75%] py-4',
+          isHighlighted && 'font-bold',
         )}
       >
-        {label} {hasCounter && <div className="mx-2">({counter})</div>}
+        {label}
+        {hasCounter ? <div className="mx-2">({counter})</div> : ''}
       </label>
 
       {selected?.[id]?.checked ? (
@@ -74,7 +89,7 @@ const TreeItem = ({
           additionalClasses={['ml-auto']}
           disabled={!id || !label}
           checked={selected?.[id]?.aggregate}
-          title={'Agreguj jako pozostałe jednostki'}
+          title={aggregateHoverTitle}
         />
       ) : (
         ''
@@ -118,6 +133,10 @@ TreeItem.propTypes = {
    * TreeItem row background color
    */
   treeItemColor: PropTypes.oneOf(['gray', 'none']),
+  /**
+   * TreeItem aggregate checkbox hover title text
+   */
+  aggregateHoverTitle: PropTypes.string,
 };
 
 TreeItem.defaultProps = {
@@ -127,7 +146,9 @@ TreeItem.defaultProps = {
   onOpen: undefined,
   open: false,
   hasArrow: false,
+  hasCounter: false,
   selected: {},
   treeItemColor: 'none',
   counter: 0,
+  aggregateHoverTitle: 'Agreguj jako pozostałe jednostki',
 };

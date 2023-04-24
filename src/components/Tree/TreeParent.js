@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import PropTypes from 'prop-types';
 
@@ -14,11 +14,27 @@ const TreeParent = ({
   selected,
   initialOpen,
   hasCounter,
+  aggregateHoverTitle,
+  filtered,
+  filteredList,
+  expanded,
+  handleExpanded,
 }) => {
-  const [currentOpen, setCurrentOpen] = React.useState(initialOpen);
+  const [currentOpen, setCurrentOpen] = React.useState(
+    expanded.indexOf(id) > -1,
+  );
+
+  useEffect(() => {
+    if (filtered) {
+      setCurrentOpen(true);
+    } else {
+      setCurrentOpen(expanded.indexOf(id) > -1);
+    }
+  }, [filtered, filteredList, expanded, id]);
 
   const handleOpen = () => {
     setCurrentOpen((prevState) => !prevState);
+    !filtered && handleExpanded?.(id);
   };
 
   return (
@@ -35,6 +51,10 @@ const TreeParent = ({
             selected={selected}
             counter={children?.length}
             hasCounter={children?.length && hasCounter}
+            aggregateHoverTitle={aggregateHoverTitle}
+            filtered={filtered}
+            filteredList={filteredList}
+            expanded={expanded}
           />
 
           {currentOpen &&
@@ -48,6 +68,10 @@ const TreeParent = ({
                 selected={selected}
                 initialOpen={initialOpen}
                 hasCounter={hasCounter}
+                aggregateHoverTitle={aggregateHoverTitle}
+                filtered={filtered}
+                filteredList={filteredList}
+                expanded={expanded}
               />
             ))}
         </>
@@ -107,4 +131,5 @@ TreeParent.defaultProps = {
   selected: {},
   initialOpen: false,
   hasCounter: false,
+  filtered: false,
 };

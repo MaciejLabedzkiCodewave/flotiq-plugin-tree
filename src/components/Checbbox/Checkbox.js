@@ -21,6 +21,7 @@ const Checkbox = ({
     <div
       className={twMerge(
         'px-1 h-[40px] w-[40px] flex justify-center items-center',
+        'group relative',
         ...additionalClasses,
       )}
       title={title}

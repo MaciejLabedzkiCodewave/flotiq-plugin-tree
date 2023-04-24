@@ -6,7 +6,7 @@ import Textarea from '../components/Textarea/Textarea';
 import Tree from '../components/Tree/Tree';
 
 // :: Data
-import DEFAULT_JSON from '../data/_sample.json';
+import DEFAULT_JSON from '../data/example.json';
 
 // :: Utils
 import { isJsonString } from '../utils/json';
@@ -62,10 +62,8 @@ const App = () => {
           ref={ref}
           data={data}
           onSelected={handleOnSelected}
-          hasCounter={true}
+          maxHeight={'100%'}
           initialOpen={false}
-          disabled={false}
-          additionalClasses={[]}
         />
 
         <hr className="my-4 border-gray-250" />
