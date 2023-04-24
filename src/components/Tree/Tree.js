@@ -76,7 +76,7 @@ const Tree = forwardRef(
 
         setLoading(false);
       }
-    }, [data]);
+    }, [data, initialOpen]);
 
     const handleOnSelected = useCallback(() => {
       const res = [];
