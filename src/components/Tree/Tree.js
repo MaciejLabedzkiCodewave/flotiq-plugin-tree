@@ -51,6 +51,7 @@ const Tree = forwardRef(
     const [filtered, setFiltered] = React.useState('');
     const [filteredList, setFilteredList] = React.useState();
     const [flatID, setFlatID] = React.useState([]);
+    const [allIDs, setAllIDs] = React.useState([]);
 
     // :: Expanded
     const [expanded, setExpanded] = React.useState([]);
@@ -59,6 +60,12 @@ const Tree = forwardRef(
     useImperativeHandle(ref, () => ({
       clearSelected() {
         setCurrentSelected({});
+      },
+      openAll() {
+        setExpanded(allIDs);
+      },
+      closeAll() {
+        setExpanded([]);
       },
     }));
 
@@ -69,6 +76,7 @@ const Tree = forwardRef(
 
       if (res) {
         setFlatID(res.flatData);
+        setAllIDs(res.allIDs);
         if (initialOpen) {
           setExpanded(res.allIDs);
         }
@@ -140,7 +148,7 @@ const Tree = forwardRef(
 
         setCurrentSelected(updateListChecked);
 
-        filtered && handleExpandedFromSelected(updateListChecked);
+        // filtered && handleExpandedFromSelected(updateListChecked);
       }
 
       if (field === 'aggregate') {
@@ -233,6 +241,7 @@ const Tree = forwardRef(
         setFilteredList([...new Set(res)]);
       } else {
         setFilteredList();
+        handleExpandedFromSelected(currentSelected);
       }
     };
 
@@ -307,13 +316,12 @@ const Tree = forwardRef(
                 children={el.children}
                 selected={currentSelected}
                 levelSpace={0}
-                initialOpen={initialOpen}
-                hasCounter={hasCounter}
                 aggregateHoverTitle={aggregateHoverTitle}
                 filtered={filtered}
                 filteredList={filteredList}
                 expanded={expanded}
                 handleExpanded={handleExpanded}
+                hasCounter={hasCounter}
               />
             ))
           )}
@@ -354,7 +362,7 @@ Tree.propTypes = {
    */
   initialOpen: PropTypes.bool,
   /**
-   * Tree add counter based on children
+   * Tree add counter based on first children
    */
   hasCounter: PropTypes.bool,
   /**
@@ -366,21 +374,46 @@ Tree.propTypes = {
    */
   hasSearch: PropTypes.bool,
   /**
-   * Tree title
+   * Tree header label text
    */
-  title: PropTypes.string,
+  label: PropTypes.string,
+  /**
+   * Tree search placeholder text
+   */
+  searchPlaceholder: PropTypes.string,
+  /**
+   * Tree text for no data after filtered
+   */
+  textNoFilterData: PropTypes.string,
+  /**
+   * Tree text for hover title for aggregate checkbox
+   */
+  aggregateHoverTitle: PropTypes.string,
+  /**
+   * Tree text on loading
+   */
+  textLoading: PropTypes.string,
+  /**
+   * Tree text when is no data
+   */
+  textNoData: PropTypes.string,
+  /**
+   * Tree that will show all children thats beelongs to parent on filtered
+   */
+  onParentMatchShowAllChildren: PropTypes.bool,
 };
 
 Tree.defaultProps = {
   data: [],
+  selected: {},
   maxHeight: '100%',
-  additionalClasses: [],
   disabled: false,
   onSelected: undefined,
   initialOpen: true,
   hasCounter: false,
   hasSearch: true,
-  selected: {},
+  onParentMatchShowAllChildren: true,
+  additionalClasses: [],
   searchPlaceholder:
     'Szukaj ( prezentacja jednostki org. podczas wyszukiwania )',
   label: 'Jednostki organizacyjne, które mają znaleźć się w raporcie',
@@ -388,5 +421,4 @@ Tree.defaultProps = {
   aggregateHoverTitle: 'Agreguj jako pozostałe jednostki',
   textLoading: 'Loading ...',
   textNoData: 'Brak danych',
-  onParentMatchShowAllChildren: true,
 };

@@ -75,6 +75,20 @@ const App = () => {
           Clear Selection
         </button>
 
+        <button
+          className="bg-white border shadow p-2 rounded-xl hover:bg-blue"
+          onClick={() => ref.current.openAll()}
+        >
+          Open All
+        </button>
+
+        <button
+          className="bg-white border shadow p-2 rounded-xl hover:bg-blue"
+          onClick={() => ref.current.closeAll()}
+        >
+          Close All
+        </button>
+
         <hr className="my-4 border-gray-250" />
 
         <Textarea

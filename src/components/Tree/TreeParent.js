@@ -12,7 +12,6 @@ const TreeParent = ({
   children,
   levelSpace,
   selected,
-  initialOpen,
   hasCounter,
   aggregateHoverTitle,
   filtered,
@@ -66,7 +65,6 @@ const TreeParent = ({
                 onClick={onClick}
                 children={el.children}
                 selected={selected}
-                initialOpen={initialOpen}
                 hasCounter={hasCounter}
                 aggregateHoverTitle={aggregateHoverTitle}
                 filtered={filtered}
@@ -112,10 +110,6 @@ TreeParent.propTypes = {
    */
   selected: PropTypes.object,
   /**
-   * TreeParent initial open
-   */
-  initialOpen: PropTypes.bool,
-  /**
    * TreeParent has counter based on children
    */
   hasCounter: PropTypes.bool,
@@ -129,7 +123,6 @@ TreeParent.defaultProps = {
   children: undefined,
   levelSpace: 60,
   selected: {},
-  initialOpen: false,
   hasCounter: false,
   filtered: false,
 };
