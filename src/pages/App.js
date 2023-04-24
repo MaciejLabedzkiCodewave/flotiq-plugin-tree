@@ -63,7 +63,7 @@ const App = () => {
           data={data}
           onSelected={handleOnSelected}
           maxHeight={'100%'}
-          initialOpen={false}
+          initialOpen={true}
         />
 
         <hr className="my-4 border-gray-250" />
