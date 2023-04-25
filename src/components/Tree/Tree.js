@@ -147,8 +147,6 @@ const Tree = forwardRef(
         generateCheckedStaus(rootListID);
 
         setCurrentSelected(updateListChecked);
-
-        // filtered && handleExpandedFromSelected(updateListChecked);
       }
 
       if (field === 'aggregate') {
@@ -215,7 +213,9 @@ const Tree = forwardRef(
 
       const res = [];
       for (let key in flatID) {
-        if (flatID[key].label.toLowerCase().includes(e.target.value)) {
+        if (
+          flatID[key].label.toLowerCase().includes(e.target.value.toLowerCase())
+        ) {
           // Case: show path id
           const itemPath = flatID[key].path;
           if (itemPath) {
