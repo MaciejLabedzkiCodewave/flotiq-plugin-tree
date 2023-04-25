@@ -34,7 +34,8 @@ const TreeItem = ({
       : true
     : false;
 
-  const isHighlighted = filtered && label.toLowerCase().indexOf(filtered) > -1;
+  const isHighlighted =
+    filtered && label.toLowerCase().indexOf(filtered.toLowerCase()) > -1;
 
   return (
     <div
